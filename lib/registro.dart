@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'apiService/apiConect.dart';
 import 'home.dart';
 import 'mainScreen.dart';
+import 'login.dart';
+class RegistroPage extends StatelessWidget {
+  RegistroPage({super.key});
 
-import 'registro.dart';
-class loginPage extends StatelessWidget {
-  loginPage({super.key});
-
-  final TextEditingController correo = TextEditingController();
-  final TextEditingController password = TextEditingController();
+  final TextEditingController nombre_usuario = TextEditingController();
+   final TextEditingController correo = TextEditingController();
+  final TextEditingController password1 = TextEditingController();
+  final TextEditingController password2 = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
@@ -25,6 +26,15 @@ class loginPage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                TextField(
+                  controller: nombre_usuario,
+                  decoration: const InputDecoration(
+                    labelText: "Nombre de usuario",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+
+                const SizedBox(height: 10),   
 
                 TextField(
                   controller: correo,
@@ -37,10 +47,19 @@ class loginPage extends StatelessWidget {
                 const SizedBox(height: 10),
 
                 TextField(
-                  controller: password,
+                  controller: password1,
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: "Contraseña",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: password2,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: "Repetir contraseña",
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -49,8 +68,10 @@ class loginPage extends StatelessWidget {
 
                 Row(
                   children: [
-                    Text("¿No tienes cuenta?"),
+                    Text("¿Ya tienes cuenta?"),
+                    
                     const SizedBox(width: 5),
+                    
                     TextButton(
                       style:  TextButton.styleFrom(
                         padding: EdgeInsets.zero, // Elimina el padding por defecto si lo deseas
@@ -62,12 +83,12 @@ class loginPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RegistroPage(),
+                          builder: (context) => loginPage(),
                         ),
                       );
                       
                     },
-                    child: const Text("Regístrate"),
+                    child: const Text("Inicia Sesión"),
                   ),
                   ],
                 ),
@@ -87,31 +108,31 @@ class loginPage extends StatelessWidget {
                           : () async {
                               if (_formKey.currentState!.validate()) {
                                
-                                final res = await ApiConect.loginApp(
+                                // final res = await ApiConect.loginApp(
                                   
-                                  correo: correo.text,
-                                  password: password.text
-                                );
+                                //   correo: correo.text,
+                                //   password: password.text
+                                // );
 
                                 
 
-                                if (res != null) {
-                                  //print(res["message"]);
+                                // if (res != null) {
+                                //   //print(res["message"]);
 
-                                  if (res["success"] == true) {
-                                    print(res["message"]);
-                                  Navigator.pushReplacement(
-                                  context,
+                                //   if (res["success"] == true) {
+                                //     print(res["message"]);
+                                //   Navigator.pushReplacement(
+                                //   context,
 
-                                  MaterialPageRoute(
-                                    builder: (context) => Mainscreen(),
-                                  ),
-                                );
-                                  } else {
+                                //   MaterialPageRoute(
+                                //     builder: (context) => Mainscreen(),
+                                //   ),
+                                // );
+                                //   } else {
 
-                                    print("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-                                  }
-                                }
+                                //     print("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+                                //   }
+                                // }
                               }
                             },
 

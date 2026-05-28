@@ -53,6 +53,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
 
+
             const SizedBox(height: 20),
             
             if (sobres.isEmpty)
@@ -78,6 +79,7 @@ class _HomeState extends State<Home> {
               
               else if(sobres.isNotEmpty)
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                     // boton salir
 
@@ -86,16 +88,18 @@ class _HomeState extends State<Home> {
                     
 
                     setState(() {
+                      
                        setState(() {
                         sobres = [];
                         index = 0;
                       });
                     });
                   },
+
                   child: const Text("Salir"),
                   ),
 
-
+                  const SizedBox(width: 10),
                   ElevatedButton(
                   onPressed: () async {
                     final data = await ApiConect.abrirSobres();
