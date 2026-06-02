@@ -5,6 +5,7 @@ import 'home.dart';
 import 'mainScreen.dart';
 
 import 'registro.dart';
+
 class loginPage extends StatelessWidget {
   loginPage({super.key});
 
@@ -17,70 +18,176 @@ class loginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Center(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
+      backgroundColor: const Color.fromARGB(255, 13, 4, 17),
+      //contenido centrado
+      
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.all(25),
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 0, 0, 0),
+              borderRadius: BorderRadius.circular(25),
 
-                TextField(
-                  controller: correo,
-                  decoration: const InputDecoration(
-                    labelText: "Correo",
-                    border: OutlineInputBorder(),
+              border: Border.all(color: Colors.white, width: 1),
+            ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(18),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: const Color.fromARGB(255, 124, 58, 237).withOpacity(0.15),
+                    ),
+                    child: const Icon(
+                       Icons.person_outline,
+                      size: 55,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
 
-                const SizedBox(height: 10),
+                  const SizedBox(height: 20),
 
-                TextField(
-                  controller: password,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: "Contraseña",
-                    border: OutlineInputBorder(),
+                  const Text(
+                    "Bienvenido",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
 
-                const SizedBox(height: 10),
+                  const SizedBox(height: 5),
 
-                Row(
-                  children: [
-                    Text("¿No tienes cuenta?"),
-                    const SizedBox(width: 5),
-                    TextButton(
-                      style:  TextButton.styleFrom(
-                        padding: EdgeInsets.zero, // Elimina el padding por defecto si lo deseas
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                    onPressed: () {
-                      
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RegistroPage(),
-                        ),
-                      );
-                      
+                  Text(
+                    "Inicia sesión para continuar",
+                    style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+                  ),
+
+                  const SizedBox(height: 30),
+
+                  TextFormField(
+                    controller: correo,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Introduce tu correo";
+                      }
+                      return null;
                     },
-                    child: const Text("Regístrate"),
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(
+                        Icons.email_outlined,
+                        color: Color.fromARGB(185, 255, 255, 255),
+                      ),
+                      labelText: "Correo",
+                      labelStyle: const TextStyle(color: Color.fromARGB(218, 255, 255, 255)),
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.05),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(18),
+                        borderSide: const BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(18),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 124, 58, 237 ),
+                          width: 2,
+                        ),
+                      ),
+                    ),
                   ),
-                  ],
-                ),
 
+                  const SizedBox(height: 15),
 
+                  TextFormField(
+                    controller: password,
+                    obscureText: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Introduce tu contraseña";
+                      }
+                      return null;
+                    },
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(
+                        Icons.lock_outline,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      ),
+                      labelText: "Contraseña",
+                      labelStyle: const TextStyle(color: Colors.white70),
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.05),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(18),
+                        borderSide: const BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                      
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(18),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 124, 58, 237 ),
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                  ),
 
-                const SizedBox(height: 10),
-                ElevatedButton(
+                  const SizedBox(height: 15),
+
+                  Row(
+                    //centrar horizontalmente
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    //contenido dentro del
+                    children: [
+                      const Text(
+                        "¿No tienes cuenta?",
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => RegistroPage()),
+                          );
+                        },
+                        child: const Text(
+                          "Regístrate",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 124, 58, 237),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  SizedBox(
+                    width: double.infinity,
+                    height: 55,
+                    
+                    child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        iconColor: Colors.black,
-                        backgroundColor: Color.fromARGB(255, 212, 182, 13),
-                        foregroundColor: const Color.fromARGB(255, 0, 0, 0),
-                        
+                        backgroundColor: const Color.fromARGB(255, 124, 58, 237),
+                        foregroundColor: Colors.white,
+                        elevation: 8,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
                       ),
                       onPressed: loading
                           ? null
@@ -92,8 +199,6 @@ class loginPage extends StatelessWidget {
                                   correo: correo.text,
                                   password: password.text
                                 );
-
-                                
 
                                 if (res != null) {
                                   //print(res["message"]);
@@ -115,20 +220,17 @@ class loginPage extends StatelessWidget {
                               }
                             },
 
-                      child: loading
-                          ? SizedBox(
-                              height: 10,
-                              width: 10,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: const Color.fromARGB(255, 17, 8, 8),
-                              ),
-
-                            )
-                          : Text("Iniciar Sesion"),
-                          
+                      child: const Text(
+                        "Iniciar Sesión",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

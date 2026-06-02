@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import '../home.dart';
 class ApiConect{
 
-  static const login="http://100.97.249.120:3000/api/login";
+  static const login="http://100.123.99.44:3000/api/login";
 
-  static const register = "http://100.97.249.120:3000/api/registro";
+  static const register = "http://100.123.99.44:3000/api/registro";
 
 
-  static const sobre = "http://100.97.249.120:3000/api/cromosRamdom";
+  static const sobre = "http://100.123.99.44:3000/api/random";
+
+
   static Future<Map<String, dynamic>?> loginApp({
     required String correo,
     required String password,
@@ -48,9 +50,9 @@ class ApiConect{
     if (res.statusCode == 200) {
       final json = jsonDecode(res.body);
       // guardamos la lista
-      List data = json["sobre_cartas"];
+      List data = json["jugadores_aleatorios"];
 
-      print(" uuuuuuuuuuuuuuuu   $data");
+      print(" uuuuuuuuuuuuuuuu $data");
       //devolvemos al lista
       return data;
     } else {

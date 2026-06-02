@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'apiService/apiConect.dart';
+import 'widget/carta_cromo.dart';
 
 // en el caso de trabajar con lista dinamcas se tiene que usar  StatefulWidgeten vez de
 class Home extends StatefulWidget {
@@ -36,7 +37,7 @@ class _HomeState extends State<Home> {
                     
                     Positioned(
                       bottom: 10.0 * (i - index),
-                      child: Opacity(opacity: 0.5, child: _card(sobres[i])),
+                      child: Opacity(opacity: 0.5, child: CartaCromo(cromo: sobres[i])),
                     ),
 
                  
@@ -48,7 +49,7 @@ class _HomeState extends State<Home> {
                         }
                       });
                     },
-                    child: _card(sobres[index]),
+                    child: CartaCromo(cromo: sobres[index]),
                   ),
                 ],
               ),
@@ -121,29 +122,4 @@ class _HomeState extends State<Home> {
     );
   }
 
-
-
-
-
-
-  Widget _card(dynamic cromo) {
-    return Container(
-      width: 200,
-      height: 300,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black26)],
-      ),
-
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(cromo["nombre"], style: const TextStyle(fontSize: 18)),
-
-          Text(cromo["equipo"]),
-        ],
-      ),
-    );
-  }
 }
