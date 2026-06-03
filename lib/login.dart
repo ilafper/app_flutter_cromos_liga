@@ -27,7 +27,7 @@ class loginPage extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 25),
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: const Color.fromRGBO(0, 0, 0, 1),
               borderRadius: BorderRadius.circular(25),
 
               border: Border.all(color: Colors.white, width: 1),
@@ -205,6 +205,7 @@ class loginPage extends StatelessWidget {
 
                                   if (res["success"] == true) {
                                     print(res["message"]);
+                                    
                                   Navigator.pushReplacement(
                                   context,
 

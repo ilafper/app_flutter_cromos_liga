@@ -11,7 +11,7 @@ class CartaCromo extends StatelessWidget {
       height: 400,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/targeta_cromo.png"),
+          image: AssetImage("assets/images/targeta_futbol.png"),
           fit: BoxFit.cover,
         ),
       ),

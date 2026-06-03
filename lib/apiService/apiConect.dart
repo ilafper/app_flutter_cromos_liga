@@ -3,14 +3,18 @@ import 'dart:ffi';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import '../home.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
+import '../usuarioData/usuarioDatos.dart';
+
 class ApiConect{
 
-  static const login="http://100.123.99.44:3000/api/login";
+  static const login="http://100.97.249.120:3000/api/login";
 
-  static const register = "http://100.123.99.44:3000/api/registro";
+  static const register = "http://100.97.249.1204:3000/api/registro";
 
 
-  static const sobre = "http://100.123.99.44:3000/api/random";
+  static const sobre = "http://100.97.249.120:3000/api/random";
 
 
   static Future<Map<String, dynamic>?> loginApp({
@@ -35,6 +39,22 @@ class ApiConect{
     if (response.statusCode == 200 || response.statusCode == 400) {
       var res = jsonDecode(response.body);
       print('respues respuesta $res');
+
+      // guardar datos usuario
+
+      if (res["success"]== true) {
+        final usuario= res["user"];
+
+        UserSession.nombre= usuario["nombre"];
+        UserSession.correo= usuario["correo"];
+
+
+
+        final prefs = await SharedPreferences.getInstance();
+
+        await prefs.setString("nombre", usuario["nombre"]);
+        await prefs.setString("correo", usuario["correo"]);
+      }
       return res;
     }
   }
