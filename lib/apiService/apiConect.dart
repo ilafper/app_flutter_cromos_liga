@@ -118,8 +118,10 @@ class ApiConect{
     // si fue exitosa manda la lista
     if (res.statusCode == 200) {
       final json = jsonDecode(res.body);
+      
       // guardamos la lista
-      List data = json["jugadores_aleatorios"];
+      
+      List data = json["todos_jugadores"];
 
       print(" uuuuuuuuuuuuuuuu $data");
       //devolvemos al lista

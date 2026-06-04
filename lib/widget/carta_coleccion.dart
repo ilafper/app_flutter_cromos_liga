@@ -10,10 +10,10 @@ class CromoColeccion extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 100,
-      height: 250,
+      height: 125,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/targeta_futbol.png"),
+          image: AssetImage("assets/images/targeta_futbol_scale.png"),
           fit: BoxFit.cover,
         ),
       ),

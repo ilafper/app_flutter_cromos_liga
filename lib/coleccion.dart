@@ -11,6 +11,7 @@ class ColecctionView extends StatefulWidget {
 
 class _ColecctionView extends State<ColecctionView> {
   List todos_player = [];
+
   bool cargando = true;
   
 
@@ -20,6 +21,8 @@ class _ColecctionView extends State<ColecctionView> {
     print("cargar players vsista");
     cargar_todos_jugadores();
   }
+
+
   cargar_todos_jugadores() async {
     todos_player = await ApiConect.todosJugadores();
     print(todos_player);
@@ -35,30 +38,26 @@ class _ColecctionView extends State<ColecctionView> {
       ),
 
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                alignment: Alignment.center,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 22, 24, 35),
-                ),
-                child: cargando
-                    ? const Center(child: CircularProgressIndicator())
-                    : ListView.builder(
-                        itemCount: todos_player.length,
-                        itemBuilder: (context, index) {
-                          return Text(todos_player[index]["jugador"]);
-                        },
-                      ),
-              ),
+  child: cargando
+      ? const CircularProgressIndicator()
+      : SingleChildScrollView(
+          child: Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            alignment: WrapAlignment.center,
+            children: List.generate(
+              todos_player.length,
+              (index) {
+                return Container(
+                  padding: const EdgeInsets.all(10),
+                  //CartaCromo(cromo: sobres[i])
+                  child: CromoColeccion(cromo_coleccion:todos_player[index])
+                );
+              },
             ),
-          ],
+          ),
         ),
-      ),
+),
     );
   }
 }
