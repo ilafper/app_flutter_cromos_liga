@@ -11,15 +11,30 @@ class CustomNavigator extends StatelessWidget {
     required this.currentIndex,
     required this.onTap
   });
-
+/*
+Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 240, 132, 9).withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Icons.grid_view,
+                                color: Color.fromARGB(255, 240, 132, 9),
+                                size: 28,
+                              ),
+                            ),
+*/
   @override
   Widget build(BuildContext context){
     return BottomNavigationBar(
+       // para ponerle color de fondo por que si no no va
+      type: BottomNavigationBarType.fixed,
       //estilo 
-       selectedItemColor: const Color.fromARGB(255, 0, 0, 0),
-       unselectedItemColor: Colors.grey,
-       backgroundColor: Colors.white,
-
+      selectedItemColor: const Color.fromARGB(255, 125, 103, 146),
+      unselectedItemColor: const Color.fromARGB(255, 197, 197, 213),
+      backgroundColor: const Color.fromARGB(255, 26, 29, 42),
+      
       currentIndex:currentIndex,
       onTap: onTap,
 

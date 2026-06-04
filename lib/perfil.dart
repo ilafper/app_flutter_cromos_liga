@@ -217,7 +217,7 @@ class _PerfilView extends State<PerfilView> {
                             Text(
                               "Cartas obtenidas",
                               style: TextStyle(
-                                color: Colors.white70,
+                                color: Colors.white,
                                 fontSize: 12,
                                 letterSpacing: 1,
                               ),
@@ -321,6 +321,7 @@ class _PerfilView extends State<PerfilView> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
+            
                     side: BorderSide(
                       color: Colors.white.withOpacity(0.2),
                     ),

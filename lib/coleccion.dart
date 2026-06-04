@@ -1,4 +1,6 @@
+import 'package:app_flutter_cromos_liga/apiService/apiConect.dart';
 import 'package:flutter/material.dart';
+import 'widget/carta_coleccion.dart';
 
 class ColecctionView extends StatefulWidget {
   const ColecctionView({super.key});
@@ -8,15 +10,24 @@ class ColecctionView extends StatefulWidget {
 }
 
 class _ColecctionView extends State<ColecctionView> {
-  // 1. Variables de estado (datos que van a cambiar)
-  
-  // 2. Método para actualizar el estado y redibujar la vista
+  List todos_player = [];
+  bool cargando = true;
   
 
   @override
+  void initState() {
+    super.initState();
+    print("cargar players vsista");
+    cargar_todos_jugadores();
+  }
+  cargar_todos_jugadores() async {
+    todos_player = await ApiConect.todosJugadores();
+    print(todos_player);
+    cargando= false;
+    setState(() {});
+  }
+  @override
   Widget build(BuildContext context) {
-    // 3. Estructura visual de la vista
-    
     return Scaffold(
       appBar: AppBar(
         title: const Text('vista de todos los cromos'),
@@ -24,19 +35,30 @@ class _ColecctionView extends State<ColecctionView> {
       ),
 
       body: Center(
-        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
-            const Text(
-              "vista collecion sissi"
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 22, 24, 35),
+                ),
+                child: cargando
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        itemCount: todos_player.length,
+                        itemBuilder: (context, index) {
+                          return Text(todos_player[index]["jugador"]);
+                        },
+                      ),
+              ),
             ),
-           
           ],
         ),
       ),
-      
     );
   }
 }

@@ -16,7 +16,7 @@ class ApiConect{
 
   static const sobre = "http://100.97.249.120:3000/api/random";
 
-
+  static const todos_jugadores="http://100.97.249.120:3000/api/allplayers";
   static Future<Map<String, dynamic>?> loginApp({
     required String correo,
     required String password,
@@ -108,6 +108,25 @@ class ApiConect{
     var res = jsonDecode(response.body);
     print('respues respuesta $res');
     return res;
+  }
+
+  static Future<List<dynamic>> todosJugadores() async {
+    print("LLLAMANDO LLAMANDO PROBANDO PROBAND");
+    // peticion a la api para cargar random sobres
+    final res = await http.get(Uri.parse(todos_jugadores));
+    print(res);
+    // si fue exitosa manda la lista
+    if (res.statusCode == 200) {
+      final json = jsonDecode(res.body);
+      // guardamos la lista
+      List data = json["jugadores_aleatorios"];
+
+      print(" uuuuuuuuuuuuuuuu $data");
+      //devolvemos al lista
+      return data;
+    } else {
+      throw Exception("Error al cargar cromos");
+    }
   }
 
 }

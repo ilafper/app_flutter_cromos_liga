@@ -18,12 +18,12 @@ class CartaCromo extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: 8,
-            right: 20,
+            top: 12,
+            right: 21,
             child: Image.network(
               cromo["logo_seleccion"],
-              width: 70,
-              height: 50,
+              width: 60,
+              height: 40,
             ),
           ),
 
@@ -31,13 +31,17 @@ class CartaCromo extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
-                Image.network(
-                  cromo["imagen_player"],
-                  width: 250,
-                  height: 300,
-                ),
+                const SizedBox(height: 15),
+                
+                Container(
+                  //color: Colors.red,
 
+                  child: Image.network(
+                  cromo["imagen_player"],
+                  width: 200,
+                  height: 275,
+                ),
+                ),
                 Text(
                   cromo["jugador"],
                   textAlign: TextAlign.center,

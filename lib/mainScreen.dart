@@ -18,7 +18,7 @@ class Mainscreen extends StatefulWidget {
 class _MainScreenState extends State<Mainscreen> {
   
   int vistaActual = 0;
-
+  // lista de las diferentes vistas
   final lista_paginas=[
     Home(),
     ColecctionView(),

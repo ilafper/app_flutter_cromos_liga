@@ -14,7 +14,7 @@ class loginPage extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
-
+  bool ocultar_password= true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +109,7 @@ class loginPage extends StatelessWidget {
 
                   TextFormField(
                     controller: password,
-                    obscureText: true,
+                    //ocultar_password:true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Introduce tu contraseña";
