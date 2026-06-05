@@ -14,7 +14,8 @@ class _PerfilView extends State<PerfilView> {
   @override
   Widget build(BuildContext context) {
     // 3. Estructura visual de la vista
-    print(" ${UserSession.nombre}");
+    print("PAPAAPAPAPAPAPAAPAPAPAPAPASDASD ${UserSession.nombre}");
+    print("PAPAAPAPAPAPAPAAPAPAPAPAPASDASD ${UserSession.lista_cromos}");
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 22, 24, 35),

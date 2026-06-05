@@ -7,7 +7,7 @@ class CartaCromo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      width: 320,
       height: 400,
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -18,12 +18,12 @@ class CartaCromo extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: 12,
-            right: 21,
+            top: 14,
+            right: 18,
             child: Image.network(
-              cromo["logo_seleccion"],
-              width: 60,
-              height: 40,
+            cromo["imagen_seleccion"],
+              width: 45,
+              height: 35,
             ),
           ),
 
@@ -36,14 +36,15 @@ class CartaCromo extends StatelessWidget {
                 Container(
                   //color: Colors.red,
 
-                  child: Image.network(
-                  cromo["imagen_player"],
+                 child: Image.asset(
+                  "assets/jugadores/${cromo["imagenUrl"]}",  
                   width: 200,
                   height: 275,
+                  fit: BoxFit.contain,
                 ),
                 ),
                 Text(
-                  cromo["jugador"],
+                  cromo["nombre"],
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 20,

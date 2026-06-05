@@ -8,15 +8,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../usuarioData/usuarioDatos.dart';
 
 class ApiConect{
+  
+  static const login="http://100.123.99.44:3000/api/login";
 
-  static const login="http://100.97.249.120:3000/api/login";
-
-  static const register = "http://100.97.249.1204:3000/api/registro";
+  static const register = "http://100.123.99.44:3000/api/registro";
 
 
-  static const sobre = "http://100.97.249.120:3000/api/random";
+  static const sobre = "http://100.123.99.44:3000/api/random";
 
-  static const todos_jugadores="http://100.97.249.120:3000/api/allplayers";
+  static const todos_jugadores="http://100.123.99.44:3000/api/cromos";
+
+
+  static const mis_cromos = "http://100.123.99.44:3000/api/abrirsobre";
   static Future<Map<String, dynamic>?> loginApp({
     required String correo,
     required String password,
@@ -47,13 +50,17 @@ class ApiConect{
 
         UserSession.nombre= usuario["nombre"];
         UserSession.correo= usuario["correo"];
-
+        UserSession.lista_cromos= usuario["lista_cromos"];
+        UserSession.code_user= usuario["code_user"];
 
 
         final prefs = await SharedPreferences.getInstance();
 
         await prefs.setString("nombre", usuario["nombre"]);
         await prefs.setString("correo", usuario["correo"]);
+        await prefs.setString("code_user", usuario["code_user"]);
+        await prefs.setString("lista_cromos", json.encode(usuario["lista_cromos"]));
+
       }
       return res;
     }
@@ -61,16 +68,26 @@ class ApiConect{
 
   //abrir sobres
 
-  static Future<List<dynamic>> abrirSobres() async {
-    print("LLLAMANDO LLAMANDO PROBANDO PROBAND");
+  static Future<List<dynamic>> abrirSobres(String code_user) async {
+    print("abirendo sobre sobres");
+
     // peticion a la api para cargar random sobres
-    final res = await http.get(Uri.parse(sobre));
+    final res = await http.post(
+      Uri.parse(mis_cromos),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "code_user": code_user
+      })
+    );
+
+
     print(res);
+    print("code_user: $code_user");
     // si fue exitosa manda la lista
     if (res.statusCode == 200) {
       final json = jsonDecode(res.body);
       // guardamos la lista
-      List data = json["jugadores_aleatorios"];
+      List data = json["sobre_cartas"];
 
       print(" uuuuuuuuuuuuuuuu $data");
       //devolvemos al lista
@@ -104,7 +121,7 @@ class ApiConect{
     );
 
     //print(response.body);
-
+    
     var res = jsonDecode(response.body);
     print('respues respuesta $res');
     return res;
@@ -116,12 +133,12 @@ class ApiConect{
     final res = await http.get(Uri.parse(todos_jugadores));
     print(res);
     // si fue exitosa manda la lista
-    if (res.statusCode == 200) {
+    if (res.statusCode == 200) {  
       final json = jsonDecode(res.body);
       
       // guardamos la lista
       
-      List data = json["todos_jugadores"];
+      List data = json["lista_cromos"];
 
       print(" uuuuuuuuuuuuuuuu $data");
       //devolvemos al lista

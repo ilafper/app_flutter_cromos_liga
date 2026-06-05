@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'apiService/apiConect.dart';
 import 'widget/carta_cromo.dart';
-
+import '../usuarioData/usuarioDatos.dart';
 // en el caso de trabajar con lista dinamcas se tiene que usar  StatefulWidgeten vez de
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,9 +14,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List sobres = [];
   int index = 0;
+  @override
+  
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 22, 24, 35),
       appBar: AppBar(
@@ -44,6 +46,7 @@ class _HomeState extends State<Home> {
           children: [
             const SizedBox(height: 50),
             //si no hay cromos
+            
             if (sobres.isNotEmpty)
               Stack(
                 alignment: Alignment.center,
@@ -101,12 +104,16 @@ class _HomeState extends State<Home> {
                       ),
 
                       onPressed: () async {
-                        final data = await ApiConect.abrirSobres();
+                        print("ABRIR SOBRE");
+                        print("code_user: ${UserSession.code_user}");
+                        final code_user = UserSession.code_user ?? "";
 
-                        setState(() {
-                          sobres = data;
-                          index = 0;
-                        });
+                        final data = await ApiConect.abrirSobres(code_user);
+                         setState(() {
+                           sobres = data;
+                           index = 0;
+                         });
+                        print("sobres abiertos: $data");
                       },
                       child: const Text("ABRIR x1"),
                     ),
@@ -174,7 +181,8 @@ class _HomeState extends State<Home> {
                       ),
 
                       onPressed: () async {
-                        final data = await ApiConect.abrirSobres();
+                        final code_user = UserSession.code_user ?? "";
+                        final data = await ApiConect.abrirSobres(code_user);
 
                         setState(() {
                           sobres = data;
