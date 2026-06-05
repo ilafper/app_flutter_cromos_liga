@@ -55,7 +55,7 @@ class _ColecctionView extends State<ColecctionView> {
     final code_user = UserSession.code_user;
     //comprobar que no sea vacio o null por que si no lo pongo da error con el campo en el userdatos
     if (code_user == null || code_user.isEmpty) {
-     
+      
       cromosUsuario = [];
       return;
     }
@@ -65,9 +65,9 @@ class _ColecctionView extends State<ColecctionView> {
     print("lista cromos usuario");
     print("respuesta de cromos usuario: $respuesta");
     
-    
+    //si fue existosa se actualiza la lista
     if (respuesta['success'] == true) {
-      
+      //actualizar lista global
       cromosUsuario = respuesta['lista_cromos'] ?? [];
       // Actualizar la sesión local
       UserSession.lista_cromos = cromosUsuario;
@@ -84,10 +84,11 @@ class _ColecctionView extends State<ColecctionView> {
     if (cromosUsuario.isEmpty) {
       return false;
     }
+
     print("total lista cromos usuario: ${cromosUsuario.length}");
     // Buscar si el cromo actual está en la lista del usuario
-    for (var cromoUsuario in cromosUsuario) {
-      if (cromoUsuario["nombre"] == cromoActual["nombre"]) {
+    for (var cada_cromo_usuario in cromosUsuario) {
+      if (cada_cromo_usuario["nombre"] == cromoActual["nombre"]) {
         return true;
       }
     }
@@ -113,8 +114,9 @@ class _ColecctionView extends State<ColecctionView> {
                   runSpacing: 10,
                   alignment: WrapAlignment.center,
                   children: List.generate(todos_player.length, (index) {
-                     final cromo = todos_player[index];
-                      final desbloqueado = estaDesbloqueado(cromo);
+                    final cromo = todos_player[index];
+                    //pasarle todos los cromos de todos_player
+                    final desbloqueado = estaDesbloqueado(cromo);
                     return Container(
                       padding: const EdgeInsets.all(10),
                       // todos los players
