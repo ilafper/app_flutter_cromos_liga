@@ -29,25 +29,24 @@ class CromoColeccion extends StatelessWidget {
     
     //carta dusbloqueda;
     return Container(
-      width: 150,  // Aumentado el ancho de la tarjeta
-      height: 200, // Aumentado el alto de la tarjeta
+      width: 150,  
+      height: 200,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/jugadores/${cromo_coleccion["imagenUrl"]}"), 
-          fit: BoxFit.cover,
+          image: AssetImage("assets/images/targeta_futbol_scale.png"), 
+          fit: BoxFit.contain,
         ),
       ),
       child: Stack(
         children: [
           // Logo de la selección (esquina superior derecha)
           Positioned(
-            top: 5,
-            right: 5,
+            top: 4,
+            right: 7,
             child: Image.network(
-
-              cromo_coleccion["logo_seleccion"],
-              width: 40,   
-              height: 40, 
+              cromo_coleccion["imagen_seleccion"],
+              width: 25,   
+              height: 25, 
               fit: BoxFit.contain,
             ),
           ),
@@ -64,8 +63,8 @@ class CromoColeccion extends StatelessWidget {
                 
                 // Imagen del jugador
                 Container(
-                  child: Image.network(
-                    cromo_coleccion["imagen_player"],
+                  child: Image.asset(
+                    "assets/jugadores/${cromo_coleccion["imagenUrl"]}",  
                     width: 100,
                     height: 112,  
                     fit: BoxFit.contain,

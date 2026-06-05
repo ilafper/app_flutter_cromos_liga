@@ -2,6 +2,7 @@ import 'package:app_flutter_cromos_liga/apiService/apiConect.dart';
 import 'package:flutter/material.dart';
 import 'widget/carta_coleccion.dart';
 import '../usuarioData/usuarioDatos.dart';
+
 class ColecctionView extends StatefulWidget {
   const ColecctionView({super.key});
 
@@ -10,38 +11,88 @@ class ColecctionView extends StatefulWidget {
 }
 
 class _ColecctionView extends State<ColecctionView> {
+  //lista de todos los jugadores que hay
   List todos_player = [];
-  List<String> cromosUsuario = [];
+  //lista de cromos del usuario
+  List cromosUsuario = [];
   bool cargando = true;
   
   @override
   void initState() {
     super.initState();
-    print("cargar players vsista");
-    cargar_todos_jugadores();
+    cargarDatos();
   }
 
+  Future<void> cargarDatos() async {
+    //cargar empezar
+    setState(() {
+      cargando = true;
+    });
+    // cargar todos los jugadores y los cromos del usuario
+    await cargar_todos_jugadores();
+    await cargar_cromos_usuario();
+
+    setState(() {
+      cargando = false;
+    });
+  }
+  
+
+  
+
+
   cargar_todos_jugadores() async {
+    //peticion a la api
     todos_player = await ApiConect.todosJugadores();
-    print(todos_player);
+    cargando=false;
+    //actualizar interfaz con set state
+    setState(() {});
+  }
+  
+
+  cargar_cromos_usuario() async {
+    //peticion a la api
+    final code_user = UserSession.code_user;
+    //comprobar que no sea vacio o null por que si no lo pongo da error con el campo en el userdatos
+    if (code_user == null || code_user.isEmpty) {
+     
+      cromosUsuario = [];
+      return;
+    }
+    //peticion
+    final respuesta = await ApiConect.ObtenerDatosUsuario(code_user);
+    
+    print("lista cromos usuario");
+    print("respuesta de cromos usuario: $respuesta");
+    
+    
+    if (respuesta['success'] == true) {
+      
+      cromosUsuario = respuesta['lista_cromos'] ?? [];
+      // Actualizar la sesión local
+      UserSession.lista_cromos = cromosUsuario;
+    } else {
+      cromosUsuario = [];
+    }
     cargando = false;
     setState(() {});
   }
 
-  bool estaDesbloqueado(dynamic todos_player) {
-      // comprobar si la lista esta vacia o no hay lista
-      if (UserSession.lista_cromos != null || UserSession.lista_cromos!.isEmpty) {
-        return false;
-      }
-      // recorrerla lista y comparar
-      for (var cada_cromo_usuario in UserSession.lista_cromos!) {
-        if (cada_cromo_usuario["nombre"] == todos_player["nombre"]) {
-          return true;
-        }
-      }
-
-      
+  
+  bool estaDesbloqueado(dynamic cromoActual) {
+    // Si no hay cromos, todo bloqueado
+    if (cromosUsuario.isEmpty) {
       return false;
+    }
+    print("total lista cromos usuario: ${cromosUsuario.length}");
+    // Buscar si el cromo actual está en la lista del usuario
+    for (var cromoUsuario in cromosUsuario) {
+      if (cromoUsuario["nombre"] == cromoActual["nombre"]) {
+        return true;
+      }
+    }
+    
+    return false;
   }
 
   @override

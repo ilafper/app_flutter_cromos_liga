@@ -20,6 +20,11 @@ class ApiConect{
 
 
   static const mis_cromos = "http://100.123.99.44:3000/api/abrirsobre";
+
+
+  static const datos_usuario = "http://100.123.99.44:3000/api/datosusuarios";
+
+
   static Future<Map<String, dynamic>?> loginApp({
     required String correo,
     required String password,
@@ -45,7 +50,7 @@ class ApiConect{
 
       // guardar datos usuario
 
-      if (res["success"]== true) {
+      if (res["success"] == true) {
         final usuario= res["user"];
 
         UserSession.nombre= usuario["nombre"];
@@ -132,6 +137,7 @@ class ApiConect{
     // peticion a la api para cargar random sobres
     final res = await http.get(Uri.parse(todos_jugadores));
     print(res);
+
     // si fue exitosa manda la lista
     if (res.statusCode == 200) {  
       final json = jsonDecode(res.body);
@@ -140,7 +146,7 @@ class ApiConect{
       
       List data = json["lista_cromos"];
 
-      print(" uuuuuuuuuuuuuuuu $data");
+      //print(" uuuuuuuuuuuuuuuu $data");
       //devolvemos al lista
       return data;
     } else {
@@ -148,4 +154,39 @@ class ApiConect{
     }
   }
 
+  static Future<Map<String, dynamic>> ObtenerDatosUsuario(String code_user) async {
+  
+  
+  try {
+    final url = "$datos_usuario/$code_user";
+    
+    final res = await http.get(
+      Uri.parse(url),
+      headers: {"Content-Type": "application/json"},
+    );
+
+   
+
+    if (res.statusCode == 200) {  
+      final json = jsonDecode(res.body);
+      
+      return {
+        'success': true,
+        'lista_cromos': json['lista_cromos'] ?? [],
+      };
+    } else {
+      return {
+        'success': false,
+        'mensaje': 'Error ${res.statusCode}',
+      };
+    }
+    
+  } catch (e) {
+    print("Error: $e");
+    return {
+      'success': false,
+      'mensaje': e.toString(),
+    };
+  }
+}
 }
