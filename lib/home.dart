@@ -6,7 +6,7 @@ import '../usuarioData/usuarioDatos.dart';
 // en el caso de trabajar con lista dinamcas se tiene que usar  StatefulWidgeten vez de
 class Home extends StatefulWidget {
   const Home({super.key});
-
+  
   @override
   State<Home> createState() => _HomeState();
 }
@@ -14,12 +14,15 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List sobres = [];
   int index = 0;
-  @override
+  
   
 
   @override
   Widget build(BuildContext context) { 
+    print("ESTA DISTICAS ESTADISTICAS");
+    print(UserSession.estadisticas);
     return Scaffold(
+      
       backgroundColor: Color.fromARGB(255, 22, 24, 35),
       appBar: AppBar(
         title: const Text("Home", style: TextStyle(color: Colors.white)),

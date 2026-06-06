@@ -59,6 +59,7 @@ class _ColecctionView extends State<ColecctionView> {
       cromosUsuario = [];
       return;
     }
+
     //peticion
     final respuesta = await ApiConect.ObtenerDatosUsuario(code_user);
     
@@ -84,8 +85,7 @@ class _ColecctionView extends State<ColecctionView> {
     if (cromosUsuario.isEmpty) {
       return false;
     }
-
-    print("total lista cromos usuario: ${cromosUsuario.length}");
+    
     // Buscar si el cromo actual está en la lista del usuario
     for (var cada_cromo_usuario in cromosUsuario) {
       if (cada_cromo_usuario["nombre"] == cromoActual["nombre"]) {

@@ -1,3 +1,4 @@
+import 'package:app_flutter_cromos_liga/apiService/apiConect.dart';
 import 'package:app_flutter_cromos_liga/login.dart';
 import 'package:flutter/material.dart';
 import '../usuarioData/usuarioDatos.dart';
@@ -11,12 +12,43 @@ class PerfilView extends StatefulWidget {
 }
 
 class _PerfilView extends State<PerfilView> {
+  String sobres_abiertos = "0";
+  String cartas_totales = "0";
+  String cartas_repetidas = "0";
+  
+  @override
+  void initState() {
+    super.initState();
+    cargarEstadisticas();
+  }
+
+  Future<void> cargarEstadisticas() async {
+    final code_user = UserSession.code_user;
+    //comprobar que no sea null
+    if (code_user == null || code_user.isEmpty) {
+      return;
+    }
+    final respuesta = await ApiConect.ObtenerDatosUsuario(code_user);
+    print(respuesta);
+    if (respuesta["success"] == true) {
+      sobres_abiertos = respuesta["estadisticas"]["sobres_abiertos"].toString();
+      cartas_totales = respuesta["estadisticas"]["cartas_totales"].toString();
+      cartas_repetidas = respuesta["estadisticas"]["cartas_repetidas"].toString();
+      print(sobres_abiertos);
+      print(cartas_repetidas);
+      print(cartas_totales);
+    } else {}
+
+    setState(() {
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // 3. Estructura visual de la vista
-    print("PAPAAPAPAPAPAPAAPAPAPAPAPASDASD ${UserSession.nombre}");
-    print("PAPAAPAPAPAPAPAAPAPAPAPAPASDASD ${UserSession.lista_cromos}");
+    
 
+    //final sobres_parse = UserSession.estadisti
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 22, 24, 35),
       appBar: AppBar(
@@ -124,7 +156,7 @@ class _PerfilView extends State<PerfilView> {
                         // TEXTO IZQUIERDA
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "SOBRES ABIERTOS",
                               style: TextStyle(
@@ -133,9 +165,10 @@ class _PerfilView extends State<PerfilView> {
                                 letterSpacing: 1,
                               ),
                             ),
+
                             SizedBox(height: 6),
                             Text(
-                              "123,123",
+                              sobres_abiertos,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 22,
@@ -225,7 +258,7 @@ class _PerfilView extends State<PerfilView> {
                             ),
                             SizedBox(height: 6),
                             Text(
-                              "1111",
+                              cartas_totales,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 22,
@@ -292,7 +325,7 @@ class _PerfilView extends State<PerfilView> {
                             ),
                             SizedBox(height: 6),
                             Text(
-                              "0",
+                              cartas_repetidas,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 22,

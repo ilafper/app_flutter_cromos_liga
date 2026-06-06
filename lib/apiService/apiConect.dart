@@ -7,40 +7,29 @@ import '../home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../usuarioData/usuarioDatos.dart';
 
-class ApiConect{
-  
-  static const login="http://100.123.99.44:3000/api/login";
+class ApiConect {
+  static const login = "http://100.123.99.44:3000/api/login";
 
   static const register = "http://100.123.99.44:3000/api/registro";
 
-
   static const sobre = "http://100.123.99.44:3000/api/random";
 
-  static const todos_jugadores="http://100.123.99.44:3000/api/cromos";
-
+  static const todos_jugadores = "http://100.123.99.44:3000/api/cromos";
 
   static const mis_cromos = "http://100.123.99.44:3000/api/abrirsobre";
 
-
   static const datos_usuario = "http://100.123.99.44:3000/api/datosusuarios";
-
 
   static Future<Map<String, dynamic>?> loginApp({
     required String correo,
     required String password,
-    
   }) async {
     final response = await http.post(
       Uri.parse(login),
       headers: {"Content-Type": "application/json"},
 
-      body: jsonEncode({
-        "correo": correo,
-        "password":password
-      }),
+      body: jsonEncode({"correo": correo, "password": password}),
     );
-
-
 
     //print(response.body);
 
@@ -51,21 +40,27 @@ class ApiConect{
       // guardar datos usuario
 
       if (res["success"] == true) {
-        final usuario= res["user"];
+        final usuario = res["user"];
 
-        UserSession.nombre= usuario["nombre"];
-        UserSession.correo= usuario["correo"];
-        UserSession.lista_cromos= usuario["lista_cromos"];
-        UserSession.code_user= usuario["code_user"];
-
+        UserSession.nombre = usuario["nombre"];
+        UserSession.correo = usuario["correo"];
+        UserSession.lista_cromos = usuario["lista_cromos"];
+        UserSession.code_user = usuario["code_user"];
+        UserSession.estadisticas = usuario["estadisticas"];
 
         final prefs = await SharedPreferences.getInstance();
 
         await prefs.setString("nombre", usuario["nombre"]);
         await prefs.setString("correo", usuario["correo"]);
         await prefs.setString("code_user", usuario["code_user"]);
-        await prefs.setString("lista_cromos", json.encode(usuario["lista_cromos"]));
-
+        await prefs.setString(
+          "lista_cromos",
+          json.encode(usuario["lista_cromos"]),
+        );
+        await prefs.setString(
+          "estadisticas",
+          json.encode(usuario["estadisticas"]),
+        );
       }
       return res;
     }
@@ -80,11 +75,8 @@ class ApiConect{
     final res = await http.post(
       Uri.parse(mis_cromos),
       headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        "code_user": code_user
-      })
+      body: jsonEncode({"code_user": code_user}),
     );
-
 
     print(res);
     print("code_user: $code_user");
@@ -109,10 +101,9 @@ class ApiConect{
     required String password1,
     required String password2,
   }) async {
-    
     print(nombre);
     print(correo);
-    
+
     final response = await http.post(
       Uri.parse(register),
       headers: {"Content-Type": "application/json"},
@@ -126,7 +117,7 @@ class ApiConect{
     );
 
     //print(response.body);
-    
+
     var res = jsonDecode(response.body);
     print('respues respuesta $res');
     return res;
@@ -139,11 +130,11 @@ class ApiConect{
     print(res);
 
     // si fue exitosa manda la lista
-    if (res.statusCode == 200) {  
+    if (res.statusCode == 200) {
       final json = jsonDecode(res.body);
-      
+
       // guardamos la lista
-      
+
       List data = json["lista_cromos"];
 
       //print(" uuuuuuuuuuuuuuuu $data");
@@ -154,39 +145,29 @@ class ApiConect{
     }
   }
 
-  static Future<Map<String, dynamic>> ObtenerDatosUsuario(String code_user) async {
-  
-  
-  try {
-    final url = "$datos_usuario/$code_user";
-    
-    final res = await http.get(
-      Uri.parse(url),
-      headers: {"Content-Type": "application/json"},
-    );
+  static Future<Map<String, dynamic>> ObtenerDatosUsuario(String code_user,) async {
+    try {
+      final url = "$datos_usuario/$code_user";
 
-   
+      final res = await http.get(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+      );
 
-    if (res.statusCode == 200) {  
-      final json = jsonDecode(res.body);
-      
-      return {
-        'success': true,
-        'lista_cromos': json['lista_cromos'] ?? [],
-      };
-    } else {
-      return {
-        'success': false,
-        'mensaje': 'Error ${res.statusCode}',
-      };
+      if (res.statusCode == 200) {
+        final json = jsonDecode(res.body);
+
+        return {
+          'success': true,
+          'lista_cromos': json['lista_cromos'] ?? [],
+          'estadisticas': json['estadisticas'] ?? [],
+        };
+      } else {
+        return {'success': false, 'mensaje': 'Error ${res.statusCode}'};
+      }
+    } catch (e) {
+      print("Error: $e");
+      return {'success': false, 'mensaje': e.toString()};
     }
-    
-  } catch (e) {
-    print("Error: $e");
-    return {
-      'success': false,
-      'mensaje': e.toString(),
-    };
   }
-}
 }
