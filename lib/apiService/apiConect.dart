@@ -19,6 +19,7 @@ class ApiConect {
   static const mis_cromos = "http://100.123.99.44:3000/api/abrirsobre";
 
   static const datos_usuario = "http://100.123.99.44:3000/api/datosusuarios";
+  static const url_tienda = "http://100.123.99.44:3000/api/tienda";
 
   static Future<Map<String, dynamic>?> loginApp({
     required String correo,
@@ -157,7 +158,7 @@ class ApiConect {
       if (res.statusCode == 200) {
         final json = jsonDecode(res.body);
 
-        return {
+        return { 
           'success': true,
           'lista_cromos': json['lista_cromos'] ?? [],
           'estadisticas': json['estadisticas'] ?? [],
@@ -169,5 +170,27 @@ class ApiConect {
       print("Error: $e");
       return {'success': false, 'mensaje': e.toString()};
     }
+  }
+
+
+
+  static  Future<Map<String, dynamic>> tienda() async {
+    print("abirendo sobre sobres");
+
+    // peticion a la api para cargar random sobres
+    final res = await http.get(Uri.parse(url_tienda),headers: {"Content-Type": "application/json"});
+
+    print(res);
+    // si fue exitosa manda la lista
+    if (res.statusCode == 200) {
+        final json = jsonDecode(res.body);
+
+        return { 
+          'success': true,
+          'cartas_random': json['cartas_random'] ?? [],
+        };
+      } else {
+        return {'success': false, 'mensaje': 'Error ${res.statusCode}'};
+      }
   }
 }

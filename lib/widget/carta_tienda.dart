@@ -1,112 +1,94 @@
 import 'package:flutter/material.dart';
 
 class CartasTienda extends StatelessWidget {
-  
   final dynamic cromo_tienda;
 
+  const CartasTienda({super.key, required this.cromo_tienda});
 
-  const CartasTienda({
-    super.key, 
-    required this.cromo_tienda, 
-    });
- 
   @override
   Widget build(BuildContext context) {
-    //carta dusbloqueda;
     return Container(
-      width: 160,  
-      height: 240,
+      width: 160,
+      height: 230,
       decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 26, 29, 42),
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(
-                        color: Colors.white.withOpacity(0.08),
-                        width: 1,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-      child: Stack(
+        color: const Color.fromARGB(255, 26, 29, 42),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: Colors.white.withOpacity(0.08), width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Logo de la selección (esquina superior derecha)
-          Positioned(
-            top: 4,
-            right: 7,
-            child: Image.network(
-              cromo_tienda["imagen_seleccion"],
-              width: 25,   
-              height: 25, 
-              fit: BoxFit.contain,
+          // Logo (esquina superior derecha usando Align)
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Image.network(
+                cromo_tienda["imagen_seleccion"],
+                width: 25,
+                height: 25,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
-          
-          
-          
-          
-          // Contenido principal (imagen del jugador y nombre)
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20),
-                
-                // Imagen del jugador
-                Container(
-                  child: Image.asset(
-                    "assets/jugadores/${cromo_tienda["imagenUrl"]}",  
-                    width: 100,
-                    height: 112,  
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                
-                const SizedBox(height: 10), // Espacio entre imagen y nombre
-                
-                // Nombre del jugador
-                Text(
-                  cromo_tienda["nombre"],
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20, 
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  maxLines: 2, 
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 10,),
-                Container(
-                  width: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: const Color.fromARGB(255, 125, 103, 146),
-                  ),
-                  
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                   
-                    child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                        ElevatedButton(onPressed: (){
 
-                        }, child: Text("INTERCAMBIAR"))
-                       
-                    ],
+          // Imagen del jugador
+          Image.asset(
+            "assets/jugadores/${cromo_tienda["imagenUrl"] ?? ""}",
+            width: 90,
+            height: 100,
+            fit: BoxFit.contain,
+            errorBuilder: (context, error, stackTrace) => 
+              const Icon(Icons.person, size: 80, color: Colors.grey),
+          ),
 
-                  ),
-                  ),
+          const SizedBox(height: 8),
+
+          // Nombre del jugador
+          Text(
+            cromo_tienda["nombre"] ?? "Desconocido",
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+
+          const SizedBox(height: 12),
+
+          // boton
+          SizedBox(
+            width: 100,
+            height: 32,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 125, 103, 146),
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.zero,
+                textStyle: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(height: 10,),
-                
-              ],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+              ),
+              child: const Text("Intercambiar"),
             ),
           ),
+
+          const SizedBox(height: 15),
         ],
       ),
     );
