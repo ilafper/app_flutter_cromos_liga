@@ -43,6 +43,7 @@ class CartaCromo extends StatelessWidget {
                   fit: BoxFit.contain,
                 ),
                 ),
+                
                 Text(
                   cromo["nombre"],
                   textAlign: TextAlign.center,

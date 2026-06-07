@@ -22,12 +22,13 @@ class _PerfilView extends State<PerfilView> {
     cargarEstadisticas();
   }
 
-  Future<void> cargarEstadisticas() async {
+  cargarEstadisticas() async {
     final code_user = UserSession.code_user;
     //comprobar que no sea null
     if (code_user == null || code_user.isEmpty) {
       return;
     }
+    
     final respuesta = await ApiConect.ObtenerDatosUsuario(code_user);
     print(respuesta);
     if (respuesta["success"] == true) {

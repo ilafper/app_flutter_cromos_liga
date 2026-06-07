@@ -23,6 +23,7 @@ class _ColecctionView extends State<ColecctionView> {
     cargarDatos();
   }
 
+
   Future<void> cargarDatos() async {
     //cargar empezar
     setState(() {
@@ -69,7 +70,7 @@ class _ColecctionView extends State<ColecctionView> {
     //si fue existosa se actualiza la lista
     if (respuesta['success'] == true) {
       //actualizar lista global
-      cromosUsuario = respuesta['lista_cromos'] ?? [];
+      cromosUsuario = respuesta['lista_cromos'];
       // Actualizar la sesión local
       UserSession.lista_cromos = cromosUsuario;
     } else {

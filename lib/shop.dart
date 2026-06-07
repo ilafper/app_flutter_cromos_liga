@@ -8,18 +8,33 @@ class ShopView extends StatefulWidget {
 }
 
 class _ShopView extends State<ShopView> {
-  // 1. Variables de estado (datos que van a cambiar)
-  
-  // 2. Método para actualizar el estado y redibujar la vista
+ 
   
 
   @override
   Widget build(BuildContext context) {
-    // 3. Estructura visual de la vista
+    
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 22, 24, 35),
       appBar: AppBar(
-        title: const Text('tienda de cromos'),
-        backgroundColor: Colors.blueAccent,
+        title: const Text("Tienda", style: TextStyle(color: Colors.white)),
+        backgroundColor: Color.fromARGB(255, 22, 24, 35),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(
+            height: 0.5,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.15),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.white.withOpacity(0.08),
+                  blurRadius: 1,
+                  spreadRadius: 0.2,
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
 
       body: Center(

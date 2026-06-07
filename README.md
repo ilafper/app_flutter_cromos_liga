@@ -19,4 +19,4 @@ samples, guidance on mobile development, and a full API reference.
 
 // https://stitch.withgoogle.com/projects/7043883822503482800?pli=1
 
-//https://stitch.withgoogle.com/projects/7043883822503482800?pli=1 
+// https://stitch.withgoogle.com/projects/7043883822503482800?pli=1 
