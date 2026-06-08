@@ -1,19 +1,36 @@
 import 'package:flutter/material.dart';
+import '../usuarioData/usuarioDatos.dart';
+import 'package:app_flutter_cromos_liga/apiService/apiConect.dart';
 
+import 'package:app_flutter_cromos_liga/widget/cromo_tuyo_intercambiar.dart';
 class CartasTienda extends StatelessWidget {
   final dynamic cromo_tienda;
+  final dynamic cromos_user;
+  
 
-  const CartasTienda({super.key, required this.cromo_tienda});
+  const CartasTienda({super.key, required this.cromo_tienda, required this.cromos_user});
 
   @override
   Widget build(BuildContext context) {
+    
+    
+    bool cargando=true;
+    final dynamic cromo_tienda_escogido= {
+      "nombre":cromo_tienda["nombre"],
+      "imagen_seleccion":cromo_tienda["imagen_seleccion"],
+      "imagenUrl":cromo_tienda["imagenUrl"],
+      "apellidos":cromo_tienda["apellidos"],
+
+    };
+    
+
     return Container(
       width: 160,
       height: 230,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 26, 29, 42),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.white.withOpacity(0.08), width: 1),
+        border: Border.all(color: const Color.fromARGB(93, 255, 255, 255), width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.3),
@@ -41,7 +58,7 @@ class CartasTienda extends StatelessWidget {
 
           // Imagen del jugador
           Image.asset(
-            "assets/jugadores/${cromo_tienda["imagenUrl"] ?? ""}",
+            "assets/jugadores/${cromo_tienda["imagenUrl"]}",
             width: 90,
             height: 100,
             fit: BoxFit.contain,
@@ -52,8 +69,9 @@ class CartasTienda extends StatelessWidget {
           const SizedBox(height: 8),
 
           // Nombre del jugador
+
           Text(
-            cromo_tienda["nombre"] ?? "Desconocido",
+            cromo_tienda["nombre"],
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 14,
@@ -67,11 +85,57 @@ class CartasTienda extends StatelessWidget {
           const SizedBox(height: 12),
 
           // boton
+
           SizedBox(
             width: 100,
             height: 32,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                print("intercambiar");
+                print("cogiste");
+                //print(cromo_tienda["nombre"]);
+                print(cromo_tienda_escogido);
+                showModalBottomSheet(
+                context: context, 
+                builder: (BuildContext context){
+                  return Container(
+                    color: const Color.fromARGB(255, 26, 29, 42),
+                    width: 400,
+                    height: 500,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10,),
+                        Text("Escoge la carta a intercambiar", style: TextStyle(
+                          color: Colors.white
+                        ),),
+
+                        const SizedBox(height: 5,),
+                        Expanded(
+                          child: SingleChildScrollView(
+                          
+                          child: Wrap(
+                            spacing: 20,
+                            runSpacing: 20,
+                            alignment: WrapAlignment.center,
+                            children: List.generate(cromos_user.length, (index) {
+                              final lista_cromos = cromos_user[index];
+                             
+                              return CartasUserIntercambio(
+                                lista_cromos_usuario_intercambio: lista_cromos, carta_seleccionada:cromo_tienda_escogido
+                                
+                                );
+                            }),
+                          ),
+                        )
+                        )
+
+                        
+                      ],
+                    ),
+                  );
+                },
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 125, 103, 146),
                 foregroundColor: Colors.white,

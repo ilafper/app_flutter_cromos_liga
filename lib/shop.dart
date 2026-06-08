@@ -13,11 +13,14 @@ class ShopView extends StatefulWidget {
 class _ShopView extends State<ShopView> {
   List cartas_tienda = [];
   bool cargando = true;
-
+  List cromos_user =[];
+  dynamic seleccionado;
   @override
   void initState() {
     super.initState();
     cargarCromos_Tienda();
+    cargarCromos();
+    
   }
 
   cargarCromos_Tienda() async {
@@ -38,6 +41,39 @@ class _ShopView extends State<ShopView> {
         cargando = false;
       });
     }
+  }
+
+  //funcion para pasar al widget tienda y cargar cartas de usuario
+
+  cargarCromos() async{
+    //peticion a la api
+    final code_user = UserSession.code_user;
+    //comprobar que no sea vacio o null por que si no lo pongo da error con el campo en el userdatos
+    if (code_user == null || code_user.isEmpty) {
+      
+      cromos_user = [];
+      return;
+    }
+
+    //peticion
+    final respuesta = await ApiConect.ObtenerDatosUsuario(code_user);
+    
+    print("lista cromos usuario");
+    print("respuesta de cromos usuario: $respuesta");
+    
+    //si fue bien se actualiza la lista
+    if (respuesta['success'] == true) {
+  
+      //actualizar lista global
+      cromos_user = respuesta['lista_cromos'];
+      // Actualizar la sesión local
+
+      UserSession.lista_cromos = cromos_user;
+    } else {
+      cromos_user = [];
+    }
+    cargando = false;
+    setState(() {});
   }
 
   @override
@@ -69,7 +105,7 @@ class _ShopView extends State<ShopView> {
           : SingleChildScrollView(
               child: Column(
                 children: [
-                  // Botón superior
+                  // Boton superior
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Container(
@@ -118,7 +154,8 @@ class _ShopView extends State<ShopView> {
                       alignment: WrapAlignment.center,
                       children: List.generate(cartas_tienda.length, (index) {
                         final lista_cartas_tiendas = cartas_tienda[index];
-                        return CartasTienda(cromo_tienda: lista_cartas_tiendas);
+                        final lista_cromos_usuario = cromos_user;
+                        return CartasTienda(cromo_tienda: lista_cartas_tiendas, cromos_user: lista_cromos_usuario,);
                       }),
                     ),
                   ),

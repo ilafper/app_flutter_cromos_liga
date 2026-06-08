@@ -8,18 +8,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../usuarioData/usuarioDatos.dart';
 
 class ApiConect {
-  static const login = "http://100.123.99.44:3000/api/login";
 
-  static const register = "http://100.123.99.44:3000/api/registro";
+  static const login = "http://100.97.249.120:3000/api/login";
 
-  static const sobre = "http://100.123.99.44:3000/api/random";
+  static const register = "http://100.97.249.120:3000/api/registro";
 
-  static const todos_jugadores = "http://100.123.99.44:3000/api/cromos";
+  static const sobre = "http://100.97.249.120:3000/api/random";
 
-  static const mis_cromos = "http://100.123.99.44:3000/api/abrirsobre";
+  static const todos_jugadores = "http://100.97.249.120:3000/api/cromos";
 
-  static const datos_usuario = "http://100.123.99.44:3000/api/datosusuarios";
-  static const url_tienda = "http://100.123.99.44:3000/api/tienda";
+  static const mis_cromos = "http://100.97.249.120:3000/api/abrirsobre";
+
+  static const datos_usuario = "http://100.97.249.120:3000/api/datosusuarios";
+  static const url_tienda = "http://100.97.249.120:3000/api/tienda";
+  //100.97.249.120
+  static const intercambio = "http://100.97.249.120:3000/api/intercambio";
 
   static Future<Map<String, dynamic>?> loginApp({
     required String correo,
@@ -192,5 +195,36 @@ class ApiConect {
       } else {
         return {'success': false, 'mensaje': 'Error ${res.statusCode}'};
       }
+  }
+
+
+  //funcion intercambio jugadores 
+
+  static Future<Map<String, dynamic>> intercambioCartas(dynamic seleccionado1 , dynamic seleccionado2, String code_user) async {
+    
+
+    // peticion a la api
+    final res = await http.post(
+      Uri.parse(intercambio),
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({"primerSeleccionado": seleccionado1, "segundoSeleccionado":seleccionado2, "code_user":code_user}),
+    );
+
+    print(res);
+    
+    // si fue exitosa manda la lista
+    if (res.statusCode == 200) {
+      //
+      final json = jsonDecode(res.body);
+      // guardamos la lista
+
+    
+
+      print(" $json");
+      //devolvemos al lista
+      return json;
+    } else {
+      throw Exception("Error al cargar cromos");
+    }
   }
 }
