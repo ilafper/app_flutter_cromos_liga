@@ -27,7 +27,8 @@ class _RegistroPage extends State<RegistroPage>{
   final _formKey = GlobalKey<FormState>();
   
   bool loading = false;
-
+  bool ocultar_password= true;
+  bool ocultar_password2= true;
   @override
   void dispose() {
     nombre_usuario.dispose();
@@ -39,11 +40,13 @@ class _RegistroPage extends State<RegistroPage>{
 
   @override
   Widget build(BuildContext context) {
+    final bool isDesktop = MediaQuery.of(context).size.width > 600;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 13, 4, 17),
       body: Center(
         child: SingleChildScrollView(
           child: Container(
+            width: isDesktop ? 450 : double.infinity,
             margin: const EdgeInsets.symmetric(horizontal: 25),
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
@@ -167,6 +170,7 @@ class _RegistroPage extends State<RegistroPage>{
 
                   TextFormField(
                      controller: password1,
+                      obscureText: ocultar_password,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "la contraseña es obligatoria";
@@ -175,6 +179,17 @@ class _RegistroPage extends State<RegistroPage>{
                       },
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: (){
+                          setState(() {
+                            ocultar_password = !ocultar_password;
+                          });
+                        }, 
+                        icon: Icon(
+                          ocultar_password ? Icons.visibility_off : Icons.visibility,
+                          color: Colors.white70,
+                        ),
+                      ),
                       prefixIcon: const Icon(
                         Icons.lock_outline,
                         color: Color.fromARGB(255, 255, 255, 255),
@@ -205,6 +220,7 @@ class _RegistroPage extends State<RegistroPage>{
                   
                   TextFormField(
                      controller: password2,
+                      obscureText: ocultar_password2,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "repetir contraseña";
@@ -213,6 +229,17 @@ class _RegistroPage extends State<RegistroPage>{
                       },
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: (){
+                          setState(() {
+                            ocultar_password2 = !ocultar_password2;
+                          });
+                        }, 
+                        icon: Icon(
+                          ocultar_password2 ? Icons.visibility_off : Icons.visibility,
+                          color: Colors.white70,
+                        ),
+                      ),
                       prefixIcon: const Icon(
                         Icons.lock_outline,
                         color: Color.fromARGB(255, 255, 255, 255),

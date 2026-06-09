@@ -91,7 +91,7 @@ class _MainScreenState extends State<Mainscreen> {
               ...List.generate(lista_paginas.length, (index) {
                 final isSelected = vistaActual == index;
                 return ListTile(
-                  
+
                   leading: Icon(
                     iconosPaginas[index],
                     color: isSelected ? Colors.white : Colors.white60,
@@ -114,21 +114,7 @@ class _MainScreenState extends State<Mainscreen> {
                 );
               }),
 
-             // moverlo al final de todo 
-             const Spacer(),
-              
-              // Opción de cerrar sesión (opcional)
-              const Divider(color: Colors.white24),
-              ListTile(
-                leading: const Icon(Icons.logout, color: Colors.red),
-                title: const Text(
-                  "Cerrar Sesión",
-                  style: TextStyle(color: Colors.red),
-                ),
-                onTap: () {
-                  // Aquí tu lógica de logout
-                },
-              ),
+             
             ],
           ),
         ),

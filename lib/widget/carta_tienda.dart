@@ -219,7 +219,7 @@ class CartasTienda extends StatelessWidget {
               child: Container(
                 
                 child: Image.network(
-                  cromo_tienda["imagen_seleccion"] ?? "",
+                  cromo_tienda["imagen_seleccion"],
                   width: 70,
                   height: 45,
                   fit: BoxFit.contain,

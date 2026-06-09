@@ -7,6 +7,16 @@ class CartasRepetidas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Detectar si es escritorio (ancho > 800px)
+    final bool isDesktop = MediaQuery.of(context).size.width > 800;
+    
+    // ver si es escritoprio o movil
+    return isDesktop ? cartaRpetidaEscritorio(context) : cartaRepetidaMovil(context);
+  }
+
+  //movil
+
+  Widget cartaRepetidaMovil(BuildContext context) {
     //carta dusbloqueda;
     return Container(
       width: 160,
@@ -92,6 +102,100 @@ class CartasRepetidas extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+  //escritorio
+
+  Widget cartaRpetidaEscritorio(BuildContext context) {
+    //carta dusbloqueda;
+    return Container(
+      width: 260,
+      height: 380,
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 26, 29, 42),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: Colors.white.withOpacity(0.08), width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Stack(
+        children: [
+          // Logo de la selección (esquina superior derecha)
+          Positioned(
+            top: 12,
+            right: 12,
+            child: Image.network(
+              cromo_repetidos["imagen_seleccion"],
+              width: 70,
+              height: 45,
+              fit: BoxFit.contain,
+            ),
+          ),
+
+          // Contenido principal (imagen del jugador y nombre)
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 40),
+                Container(
+                  child: Image.asset(
+                    "assets/jugadores/${cromo_repetidos["imagenUrl"]}",
+                    width: 140,
+                    height: 150,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+
+                const SizedBox(height: 30), 
+                // Nombre del jugador
+                Text(
+                  cromo_repetidos["nombre"],
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  width: 220,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: const Color.fromARGB(255, 125, 103, 146),
+                  ),
+
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.repeat, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text(
+                          cromo_repetidos["repetidas"].toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

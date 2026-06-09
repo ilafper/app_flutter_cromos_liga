@@ -18,8 +18,8 @@ class CartaCromo extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: 14,
-            right: 18,
+            top: 15,
+            right: 25,
             child: Image.network(
             cromo["imagen_seleccion"],
               width: 45,

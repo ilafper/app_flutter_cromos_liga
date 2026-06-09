@@ -14,13 +14,14 @@ class _ShopView extends State<ShopView> {
   List cartas_tienda = [];
   bool cargando = true;
   List cromos_user =[];
+  List carta_primera_vez = [];
+  bool yacargo= false;
   dynamic seleccionado;
   @override
   void initState() {
-    super.initState();
-    cargarCromos_Tienda();
     cargarCromos();
-    
+    cargarCromos_Tienda();
+   
   }
 
   cargarCromos_Tienda() async {
@@ -34,6 +35,10 @@ class _ShopView extends State<ShopView> {
         cartas_tienda = respuesta['cartas_random'];
         cargando = false;
       });
+
+
+    
+      
       UserSession.lista_cromos = cartas_tienda;
     } else {
       setState(() {

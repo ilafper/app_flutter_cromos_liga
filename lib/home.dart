@@ -20,8 +20,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) { 
 
-
+   
     final bool isDesktop = MediaQuery.of(context).size.width > 800;
+    
+    
     print("ESTA DISTICAS ESTADISTICAS");
     print(UserSession.estadisticas);
     return Scaffold(
@@ -95,7 +97,8 @@ class _HomeState extends State<Home> {
                   const SizedBox(height: 20),
 
                   SizedBox(
-                    width: 200,
+                    width: isDesktop ? 300 :200 ,
+                    height: isDesktop ? 40: 40,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(
@@ -138,7 +141,8 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 100,
+                    width: isDesktop ? 300 :150 ,
+                    height: isDesktop ? 40: 40,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(
@@ -172,7 +176,8 @@ class _HomeState extends State<Home> {
                   const SizedBox(width: 10),
 
                   SizedBox(
-                    width: 150,
+                    width: isDesktop ? 300 :180 ,
+                    height: isDesktop ? 40: 40,
                     
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(

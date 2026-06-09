@@ -6,8 +6,17 @@ import 'mainScreen.dart';
 
 import 'registro.dart';
 
-class loginPage extends StatelessWidget {
-  loginPage({super.key});
+
+class loginPage extends StatefulWidget {  // ✅ Stateful SÍ tiene setState
+  const loginPage({super.key});
+
+  @override
+  State<loginPage> createState() => _loginPageState();
+}
+
+
+class _loginPageState extends State<loginPage> {
+  
 
   final TextEditingController correo = TextEditingController();
   final TextEditingController password = TextEditingController();
@@ -15,6 +24,8 @@ class loginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
   bool ocultar_password= true;
+  
+  
   @override
   Widget build(BuildContext context) {
 
@@ -113,7 +124,9 @@ class loginPage extends StatelessWidget {
 
                   TextFormField(
                     controller: password,
-                    //ocultar_password:true,
+                    //chace que se vena los puntos de la contraseña al ocultarse
+                    obscureText: ocultar_password,
+                    
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Introduce tu contraseña";
@@ -122,6 +135,17 @@ class loginPage extends StatelessWidget {
                     },
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: (){
+                          setState(() {
+                            ocultar_password = !ocultar_password;
+                          });
+                        }, 
+                        icon: Icon(
+                          ocultar_password ? Icons.visibility_off : Icons.visibility,
+                          color: Colors.white70,
+                        ),
+                      ),
                       prefixIcon: const Icon(
                         Icons.lock_outline,
                         color: Color.fromARGB(255, 255, 255, 255),
