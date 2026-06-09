@@ -40,15 +40,16 @@ class _MainScreenState extends State<Mainscreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Detectar si es escritorio (ancho > 800px)
+    
+    // Detectar si es escritorio, como en media querys y si el anchos en mas que x px
     final bool isDesktop = MediaQuery.of(context).size.width > 800;
     
     return Scaffold(
       
-      // Menú lateral SOLO en escritorio
-      drawer: isDesktop ? null : null, // No usamos drawer tradicional
-      
-      // Usamos diferente layout según plataforma
+
+      drawer: isDesktop ? null : null, 
+    
+      // dependiendo si es mas de c tamaño se usa uno u otro
       body: isDesktop ? _buildDesktopLayout() : _buildMobileLayout(),
     );
   }

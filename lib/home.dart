@@ -98,7 +98,7 @@ class _HomeState extends State<Home> {
 
                   SizedBox(
                     width: isDesktop ? 300 :200 ,
-                    height: isDesktop ? 40: 40,
+                    height: isDesktop ? 50: 50,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(
@@ -107,6 +107,9 @@ class _HomeState extends State<Home> {
                           103,
                           146,
                         ),
+
+
+                        
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
@@ -177,7 +180,7 @@ class _HomeState extends State<Home> {
 
                   SizedBox(
                     width: isDesktop ? 300 :180 ,
-                    height: isDesktop ? 40: 40,
+                    height: isDesktop ? 50: 50,
                     
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(

@@ -20,3 +20,19 @@ samples, guidance on mobile development, and a full API reference.
 // https://stitch.withgoogle.com/projects/7043883822503482800?pli=1
 
 // https://stitch.withgoogle.com/projects/7043883822503482800?pli=1 
+
+
+## Pasos para instalar el emulador de windows paras flutter 
+
+### Paso 1.
+
+Descargar el visual estudio de windows y la opcion de emulator C++
+
+## Paso 2 Comando para añadir lo de windows
+
+flutter create --platforms=windows .
+
+## Paso 3. Comando para ejecutar en emulador windows
+
+ flutter run -d windows       
+
