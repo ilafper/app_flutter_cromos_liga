@@ -8,21 +8,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../usuarioData/usuarioDatos.dart';
 
 class ApiConect {
+ 
+  static const login = "http://100.123.99.44:3000/api/login";
 
-  static const login = "http://100.97.249.120:3000/api/login";
+  static const register = "http://100.123.99.44:3000/api/registro";
 
-  static const register = "http://100.97.249.120:3000/api/registro";
+  static const sobre = "http://100.123.99.44:3000/api/random";
 
-  static const sobre = "http://100.97.249.120:3000/api/random";
+  static const todos_jugadores = "http://100.123.99.44:3000/api/cromos";
 
-  static const todos_jugadores = "http://100.97.249.120:3000/api/cromos";
+  static const mis_cromos = "http://100.123.99.44:3000/api/abrirsobre";
 
-  static const mis_cromos = "http://100.97.249.120:3000/api/abrirsobre";
-
-  static const datos_usuario = "http://100.97.249.120:3000/api/datosusuarios";
-  static const url_tienda = "http://100.97.249.120:3000/api/tienda";
-  //100.97.249.120
-  static const intercambio = "http://100.97.249.120:3000/api/intercambio";
+  static const datos_usuario = "http://100.123.99.44:3000/api/datosusuarios";
+  static const url_tienda = "http://100.123.99.44:3000/api/tienda";
+  
+  static const intercambio = "http://100.123.99.44:3000/api/intercambio";
 
   static Future<Map<String, dynamic>?> loginApp({
     required String correo,

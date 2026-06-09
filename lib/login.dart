@@ -17,6 +17,9 @@ class loginPage extends StatelessWidget {
   bool ocultar_password= true;
   @override
   Widget build(BuildContext context) {
+
+    // para tamanh de escritorio
+    final bool isDesktop = MediaQuery.of(context).size.width > 600;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 13, 4, 17),
       //contenido centrado
@@ -24,6 +27,7 @@ class loginPage extends StatelessWidget {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
+            width: isDesktop ? 450 : double.infinity,
             margin: const EdgeInsets.symmetric(horizontal: 25),
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(

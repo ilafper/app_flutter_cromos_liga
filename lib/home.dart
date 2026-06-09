@@ -19,6 +19,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) { 
+
+
+    final bool isDesktop = MediaQuery.of(context).size.width > 800;
     print("ESTA DISTICAS ESTADISTICAS");
     print(UserSession.estadisticas);
     return Scaffold(
@@ -45,7 +48,12 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: Center(
-        child: Column(
+        child: Container(
+          constraints: BoxConstraints(
+            maxWidth: isDesktop ? 800 : double.infinity,
+          ),
+          child: Column(
+          
           children: [
             const SizedBox(height: 50),
             //si no hay cromos
@@ -124,6 +132,7 @@ class _HomeState extends State<Home> {
                 ],
               )
             // en el caso de se carguen los crmos mostrar los botnes de salir y volver abrir
+
             else if (sobres.isNotEmpty)
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -199,6 +208,8 @@ class _HomeState extends State<Home> {
               ),
           ],
         ),
+        ),
+        
       ),
     );
   }

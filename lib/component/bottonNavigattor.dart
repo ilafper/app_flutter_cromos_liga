@@ -15,7 +15,7 @@ class CustomNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return BottomNavigationBar(
-       // para ponerle color de fondo por que si no no va
+      // para ponerle color de fondo por que si no no va
       type: BottomNavigationBarType.fixed,
       //estilo 
       selectedItemColor: const Color.fromARGB(255, 125, 103, 146),

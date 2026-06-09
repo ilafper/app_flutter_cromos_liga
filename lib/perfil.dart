@@ -24,7 +24,7 @@ class _PerfilView extends State<PerfilView> {
 
   cargarEstadisticas() async {
     final code_user = UserSession.code_user;
-    //comprobar que no sea null
+  
     if (code_user == null || code_user.isEmpty) {
       return;
     }

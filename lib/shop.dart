@@ -43,8 +43,8 @@ class _ShopView extends State<ShopView> {
     }
   }
 
-  //funcion para pasar al widget tienda y cargar cartas de usuario
-
+ 
+  //cargar los cromos del usuario para luego pasarla a los diferenetes wedgets 
   cargarCromos() async{
     //peticion a la api
     final code_user = UserSession.code_user;
@@ -66,8 +66,8 @@ class _ShopView extends State<ShopView> {
   
       //actualizar lista global
       cromos_user = respuesta['lista_cromos'];
-      // Actualizar la sesión local
 
+      // Actualizar
       UserSession.lista_cromos = cromos_user;
     } else {
       cromos_user = [];
@@ -114,7 +114,9 @@ class _ShopView extends State<ShopView> {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                              cargarCromos_Tienda();
+                          },
                           style:
                               ElevatedButton.styleFrom(
                                 backgroundColor: const Color.fromARGB(
