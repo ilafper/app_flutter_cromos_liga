@@ -82,14 +82,14 @@ class _ColecctionView extends State<ColecctionView> {
 
   
   bool estaDesbloqueado(dynamic cromoActual) {
-    // Si no hay cromos, todo bloqueado
+    // Si no hay cromos todo bloqueado
     if (cromosUsuario.isEmpty) {
       return false;
     }
     
-    // Buscar si el cromo actual está en la lista del usuario
+    // Buscar si el cromo actual esta en la lista del usuario
     for (var cada_cromo_usuario in cromosUsuario) {
-      if (cada_cromo_usuario["nombre"] == cromoActual["nombre"]) {
+      if (cada_cromo_usuario["nombre_jugador"] == cromoActual["nombre_jugador"]) {
         return true;
       }
     }

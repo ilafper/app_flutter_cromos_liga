@@ -21,7 +21,7 @@ class CartaCromo extends StatelessWidget {
             top: 15,
             right: 25,
             child: Image.network(
-            cromo["imagen_seleccion"],
+            cromo["logo_seleccion"],
               width: 45,
               height: 35,
             ),
@@ -36,8 +36,8 @@ class CartaCromo extends StatelessWidget {
                 Container(
                   //color: Colors.red,
 
-                 child: Image.asset(
-                  "assets/jugadores/${cromo["imagenUrl"]}",  
+                 child: Image.network(
+                  cromo["imagen_player"],  
                   width: 200,
                   height: 275,
                   fit: BoxFit.contain,
@@ -45,7 +45,7 @@ class CartaCromo extends StatelessWidget {
                 ),
                 
                 Text(
-                  cromo["nombre"],
+                  cromo["nombre_jugador"],
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 20,

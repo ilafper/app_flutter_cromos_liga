@@ -40,7 +40,7 @@ class CartasRepetidas extends StatelessWidget {
             top: 4,
             right: 7,
             child: Image.network(
-              cromo_repetidos["imagen_seleccion"],
+              cromo_repetidos["logo_seleccion"],
               width: 25,
               height: 25,
               fit: BoxFit.contain,
@@ -56,8 +56,8 @@ class CartasRepetidas extends StatelessWidget {
 
                 // Imagen del jugador
                 Container(
-                  child: Image.asset(
-                    "assets/jugadores/${cromo_repetidos["imagenUrl"]}",
+                  child: Image.network(
+                    cromo_repetidos["imagen_player"],
                     width: 100,
                     height: 112,
                     fit: BoxFit.contain,
@@ -67,7 +67,7 @@ class CartasRepetidas extends StatelessWidget {
                 const SizedBox(height: 10), // Espacio entre imagen y nombre
                 // Nombre del jugador
                 Text(
-                  cromo_repetidos["nombre"],
+                  cromo_repetidos["nombre_jugador"],
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 20,
@@ -137,7 +137,7 @@ class CartasRepetidas extends StatelessWidget {
             top: 12,
             right: 12,
             child: Image.network(
-              cromo_repetidos["imagen_seleccion"],
+              cromo_repetidos["logo_seleccion"],
               width: 70,
               height: 45,
               fit: BoxFit.contain,
@@ -151,8 +151,8 @@ class CartasRepetidas extends StatelessWidget {
               children: [
                 const SizedBox(height: 40),
                 Container(
-                  child: Image.asset(
-                    "assets/jugadores/${cromo_repetidos["imagenUrl"]}",
+                  child: Image.network(
+                    cromo_repetidos["imagen_player"],
                     width: 140,
                     height: 150,
                     fit: BoxFit.contain,
@@ -162,7 +162,7 @@ class CartasRepetidas extends StatelessWidget {
                 const SizedBox(height: 30), 
                 // Nombre del jugador
                 Text(
-                  cromo_repetidos["nombre"],
+                  cromo_repetidos["nombre_jugador"],
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 20,

@@ -14,8 +14,10 @@ class _ShopView extends State<ShopView> {
   List cartas_tienda = [];
   bool cargando = true;
   List cromos_user =[];
-  List carta_primera_vez = [];
+  
   bool yacargo= false;
+
+  List cromos_repetidos_mas_0= [];
   dynamic seleccionado;
   @override
   void initState() {
@@ -27,8 +29,8 @@ class _ShopView extends State<ShopView> {
   cargarCromos_Tienda() async {
     final respuesta = await ApiConect.tienda();
 
-    print("lista cromos usuario");
-    print("respuesta de cromos usuario: $respuesta");
+    //print("lista cromos usuario");
+    //print("respuesta de cromos usuario: $respuesta");
 
     if (respuesta['success'] == true) {
       setState(() {
@@ -64,14 +66,16 @@ class _ShopView extends State<ShopView> {
     final respuesta = await ApiConect.ObtenerDatosUsuario(code_user);
     
     print("lista cromos usuario");
-    print("respuesta de cromos usuario: $respuesta");
+    //print("respuesta de cromos usuario: $respuesta");
     
     //si fue bien se actualiza la lista
     if (respuesta['success'] == true) {
   
       //actualizar lista global
       cromos_user = respuesta['lista_cromos'];
-
+      //print("aaaaaaaaaa");
+      //print(cromos_user);
+      cromosBien(cromos_user);
       // Actualizar
       UserSession.lista_cromos = cromos_user;
     } else {
@@ -80,7 +84,23 @@ class _ShopView extends State<ShopView> {
     cargando = false;
     setState(() {});
   }
+  
+  cromosBien(List cromos_user){
+    for (var i = 0; i < cromos_user.length; i++) {
+      //print(cromos_user[i]["repetidas"]);
+      if (cromos_user[i]["repetidas"] > 0) {
+        cromos_repetidos_mas_0.add(cromos_user[i]);
+      }
 
+    }
+    //print("jcjcfjjjjj");
+    //print(cromos_repetidos_mas_0.length);
+    //print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    //print(cromos_repetidos_mas_0);
+    //print("ksksskskskskskssksksksksksik");
+    
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,7 +181,7 @@ class _ShopView extends State<ShopView> {
                       alignment: WrapAlignment.center,
                       children: List.generate(cartas_tienda.length, (index) {
                         final lista_cartas_tiendas = cartas_tienda[index];
-                        final lista_cromos_usuario = cromos_user;
+                        final lista_cromos_usuario = cromos_repetidos_mas_0;
                         return CartasTienda(cromo_tienda: lista_cartas_tiendas, cromos_user: lista_cromos_usuario,);
                       }),
                     ),

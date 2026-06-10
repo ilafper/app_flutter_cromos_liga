@@ -144,8 +144,8 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: isDesktop ? 300 :150 ,
-                    height: isDesktop ? 40: 40,
+                    width: isDesktop ? 300 :180 ,
+                    height: isDesktop ? 50: 50,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(

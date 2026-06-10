@@ -18,10 +18,9 @@ class CartasUserIntercambio extends StatelessWidget {
     String code_user = UserSession.code_user ?? "";
 
     final dynamic segundoEscogido={
-      "nombre":lista_cromos_usuario_intercambio["nombre"],
-      "apellidos":lista_cromos_usuario_intercambio["apellidos"],
-      "imagenUrl":lista_cromos_usuario_intercambio["imagenUrl"],
-      "imagen_seleccion":lista_cromos_usuario_intercambio["imagen_seleccion"],
+      "nombre_jugador":lista_cromos_usuario_intercambio["nombre_jugador"],
+      "imagen_player":lista_cromos_usuario_intercambio["imagen_player"],
+      "logo_seleccion":lista_cromos_usuario_intercambio["logo_seleccion"],
     };
 
     //carta dusbloqueda;
@@ -47,7 +46,7 @@ class CartasUserIntercambio extends StatelessWidget {
             top: 4,
             right: 7,
             child: Image.network(
-              lista_cromos_usuario_intercambio["imagen_seleccion"],
+              lista_cromos_usuario_intercambio["logo_seleccion"],
               width: 25,
               height: 25,
               fit: BoxFit.contain,
@@ -62,8 +61,8 @@ class CartasUserIntercambio extends StatelessWidget {
 
                 // Imagen del jugador
                 Container(
-                  child: Image.asset(
-                    "assets/jugadores/${lista_cromos_usuario_intercambio["imagenUrl"]}",
+                  child: Image.network(
+                    lista_cromos_usuario_intercambio["imagen_player"],
                     width: 100,
                     height: 112,
                     fit: BoxFit.contain,
@@ -73,10 +72,10 @@ class CartasUserIntercambio extends StatelessWidget {
                 const SizedBox(height: 10), // Espacio entre imagen y nombre
                 // Nombre del jugador
                 Text(
-                  lista_cromos_usuario_intercambio["nombre"],
+                  lista_cromos_usuario_intercambio["nombre_jugador"],
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 20,
+                    fontSize: 15,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -85,7 +84,9 @@ class CartasUserIntercambio extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 10),
-
+                
+                const Spacer(),
+                
                 Container(
                   
                   width: 100,
@@ -93,7 +94,7 @@ class CartasUserIntercambio extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     color: Colors.black,
                   ),
-
+                  
                   child: SizedBox(
                           width: 50,
                           height: 32,

@@ -25,10 +25,10 @@ class CartasTienda extends StatelessWidget {
     
     bool cargando=true;
     final dynamic cromo_tienda_escogido= {
-      "nombre":cromo_tienda["nombre"],
-      "imagen_seleccion":cromo_tienda["imagen_seleccion"],
-      "imagenUrl":cromo_tienda["imagenUrl"],
-      "apellidos":cromo_tienda["apellidos"],
+      "nombre":cromo_tienda["nombre_jugador"],
+      "imagen_seleccion":cromo_tienda["logo_seleccion"],
+      "imagenUrl":cromo_tienda["imagen_player"],
+
 
     };
     
@@ -57,7 +57,7 @@ class CartasTienda extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Image.network(
-                cromo_tienda["imagen_seleccion"],
+                cromo_tienda["logo_seleccion"],
                 width: 25,
                 height: 25,
                 fit: BoxFit.contain,
@@ -66,8 +66,8 @@ class CartasTienda extends StatelessWidget {
           ),
 
           // Imagen del jugador
-          Image.asset(
-            "assets/jugadores/${cromo_tienda["imagenUrl"]}",
+          Image.network(
+            cromo_tienda["imagen_player"],
             width: 90,
             height: 100,
             fit: BoxFit.contain,
@@ -80,7 +80,7 @@ class CartasTienda extends StatelessWidget {
           // Nombre del jugador
 
           Text(
-            cromo_tienda["nombre"],
+            cromo_tienda["nombre_jugador"],
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 14,
@@ -168,13 +168,13 @@ class CartasTienda extends StatelessWidget {
   }
 
   //parte escrtorio
-
+  
    Widget cartaTiendaEscritorio(BuildContext context) {
     final dynamic cromo_tienda_escogido = {
-      "nombre": cromo_tienda["nombre"],
-      "imagen_seleccion": cromo_tienda["imagen_seleccion"],
-      "imagenUrl": cromo_tienda["imagenUrl"],
-      "apellidos": cromo_tienda["apellidos"],
+      "nombre_jugador": cromo_tienda["nombre_jugador"],
+      "logo_seleccion": cromo_tienda["logo_seleccion"],
+      "imagen_player": cromo_tienda["imagen_player"],
+      
     };
 
     return Container(
@@ -219,7 +219,7 @@ class CartasTienda extends StatelessWidget {
               child: Container(
                 
                 child: Image.network(
-                  cromo_tienda["imagen_seleccion"],
+                  cromo_tienda["logo_seleccion"],
                   width: 70,
                   height: 45,
                   fit: BoxFit.contain,
@@ -235,8 +235,8 @@ class CartasTienda extends StatelessWidget {
             child: Center(
               child: Container(
                 padding: const EdgeInsets.all(12),
-                child: Image.asset(
-                  "assets/jugadores/${cromo_tienda["imagenUrl"]}",
+                child: Image.network(
+                  cromo_tienda_escogido["imagen_player"],
                   width: 140,
                   height: 160,
                   fit: BoxFit.contain,
@@ -251,7 +251,7 @@ class CartasTienda extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Text(
-              cromo_tienda["nombre"],
+              cromo_tienda["nombre_jugador"],
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
