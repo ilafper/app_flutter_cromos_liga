@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../usuarioData/usuarioDatos.dart';
 
 class ApiConect {
-  //100.97.249.120
+  //100.97.249.120 100.97.249.120
   static const login = "http://100.97.249.120:3000/api/login";
 
   static const register = "http://100.97.249.120:3000/api/registro";

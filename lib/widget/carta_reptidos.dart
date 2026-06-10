@@ -17,10 +17,10 @@ class CartasRepetidas extends StatelessWidget {
   //movil
 
   Widget cartaRepetidaMovil(BuildContext context) {
-    //carta dusbloqueda;
+    
     return Container(
       width: 160,
-      height: 240,
+      height: 230,
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 26, 29, 42),
         borderRadius: BorderRadius.circular(14),
@@ -41,8 +41,8 @@ class CartasRepetidas extends StatelessWidget {
             right: 7,
             child: Image.network(
               cromo_repetidos["logo_seleccion"],
-              width: 25,
-              height: 25,
+              width: 45,
+              height: 35,
               fit: BoxFit.contain,
             ),
           ),
@@ -70,14 +70,14 @@ class CartasRepetidas extends StatelessWidget {
                   cromo_repetidos["nombre_jugador"],
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 20,
+                    fontSize: 15,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 10),
+                const Spacer(),
                 Container(
                   width: 100,
                   decoration: BoxDecoration(

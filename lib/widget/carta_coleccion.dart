@@ -28,19 +28,26 @@ class CromoColeccion extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/targeta_futbol_scale.png"),
-            fit: BoxFit.contain,
+            fit: BoxFit.fill,
           ),
         ),
+
         child: Stack(
           children: [
-            // Logo de la selección (esquina superior derecha)
+            
+
+            Positioned.fill(
+              child: Container(color: const Color.fromARGB(185, 0, 0, 0)),
+            ),
+
+            // Logo seleccion
             Positioned(
               top: 4,
               right: 7,
               child: Image.network(
                 cromo_coleccion["logo_seleccion"],
-                width: 25,
-                height: 25,
+                width: 45,
+                height: 30,
                 fit: BoxFit.contain,
                 errorBuilder: (context, error, stackTrace) =>
                     const Icon(Icons.error, size: 20, color: Colors.red),
@@ -81,17 +88,16 @@ class CromoColeccion extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
+                 
                 ],
               ),
             ),
-
-            Positioned.fill(
-              child: Container(color: Colors.black.withOpacity(0.4)),
-            ),
-
-            // Candado en medio
             const Center(
-              child: Icon(Icons.lock, color: Colors.white, size: 60),
+              child: Icon(
+                Icons.lock,
+                color: Color.fromARGB(255, 0, 0, 0),
+                size: 70,
+              ),
             ),
           ],
         ),
@@ -111,14 +117,14 @@ class CromoColeccion extends StatelessWidget {
 
       child: Stack(
         children: [
-          // Logo de la selección (esquina superior derecha)
+          // Logo seleccion
           Positioned(
-            top: 4,
+            top: 6,
             right: 7,
             child: Image.network(
               cromo_coleccion["logo_seleccion"],
-              width: 25,
-              height: 25,
+              width: 45,
+              height: 30,
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) =>
                   const Icon(Icons.error, size: 20, color: Colors.red),
@@ -167,37 +173,44 @@ class CromoColeccion extends StatelessWidget {
   //version escritorio
   Widget cartaEscritorio() {
     if (!desbloqueado) {
-      return Container(
+      return SizedBox(
         width: 250,
         height: 350,
-        
         child: Stack(
           children: [
+            Positioned.fill(
+              child: Container(color: const Color.fromARGB(185, 0, 0, 0)),
+            ),
+            // Fondo de la carta
             Image.asset(
               "assets/images/targeta_futbol_scale.png",
               width: 250,
               height: 350,
-              fit: BoxFit.contain,
+              fit: BoxFit.fill,
             ),
+
             Positioned(
-              top: 27,
-              right: 10,
-              child: Image.network(
-                cromo_coleccion["logo_seleccion"],
-                width: 60,
+              top: 10,
+              right: 15,
+              child: SizedBox(
+                width: 55,
                 height: 35,
-                fit: BoxFit.contain,
+                child: Image.network(
+                 width: 45,
+                height: 30,
+                  cromo_coleccion["logo_seleccion"],
+                  fit: BoxFit.contain,
+                  alignment: Alignment.center,
+                ),
               ),
             ),
 
-            // Contenido principal
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(height: 30),
 
-                  //imagen jugador
                   Image.network(
                     cromo_coleccion["imagen_player"],
                     width: 150,
@@ -220,39 +233,43 @@ class CromoColeccion extends StatelessWidget {
                 ],
               ),
             ),
-            
 
-            // Candado en medio
             const Center(
-              child: Icon(Icons.lock, color: Colors.white, size: 60),
+              child: Icon(
+                Icons.lock,
+                color: Color.fromARGB(255, 0, 0, 0),
+                size: 70,
+              ),
             ),
           ],
         ),
       );
     }
 
-    // Carta desbloqueada escritorio
     return Container(
       width: 250,
       height: 350,
-      
+
       child: Stack(
         children: [
           Image.asset(
-              "assets/images/targeta_futbol_scale.png",
-              width: 250,
-              height: 350,
-              fit: BoxFit.contain,
-            ),
-            
+            "assets/images/targeta_futbol_scale.png",
+            width: 250,
+            height: 350,
+            fit: BoxFit.fill,
+          ),
+
           Positioned(
-            top: 27,
-            right: 10,
-            child: Image.network(
-              cromo_coleccion["logo_seleccion"],
-              width: 60,
+            top: 10,
+            right: 15,
+            child: SizedBox(
+              width: 55,
               height: 35,
-              fit: BoxFit.contain,
+              child: Image.network(
+                cromo_coleccion["logo_seleccion"],
+                fit: BoxFit.contain,
+                alignment: Alignment.center,
+              ),
             ),
           ),
 

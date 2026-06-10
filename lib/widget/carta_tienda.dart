@@ -3,35 +3,35 @@ import '../usuarioData/usuarioDatos.dart';
 import 'package:app_flutter_cromos_liga/apiService/apiConect.dart';
 
 import 'package:app_flutter_cromos_liga/widget/cromo_tuyo_intercambiar.dart';
+
 class CartasTienda extends StatelessWidget {
   final dynamic cromo_tienda;
   final dynamic cromos_user;
-  
 
-  const CartasTienda({super.key, required this.cromo_tienda, required this.cromos_user});
+  const CartasTienda({
+    super.key,
+    required this.cromo_tienda,
+    required this.cromos_user,
+  });
 
   @override
   Widget build(BuildContext context) {
     // Detectar si es escritorio (ancho > 800px)
     final bool isDesktop = MediaQuery.of(context).size.width > 800;
-    
+
     // ver si es escritoprio o movil
-    return isDesktop ? cartaTiendaEscritorio(context) : cartaTiendaMovil(context);
+    return isDesktop
+        ? cartaTiendaEscritorio(context)
+        : cartaTiendaMovil(context);
   }
-  
 
   Widget cartaTiendaMovil(BuildContext context) {
-    
-    
-    bool cargando=true;
-    final dynamic cromo_tienda_escogido= {
-      "nombre":cromo_tienda["nombre_jugador"],
-      "imagen_seleccion":cromo_tienda["logo_seleccion"],
-      "imagenUrl":cromo_tienda["imagen_player"],
-
-
+    bool cargando = true;
+    final dynamic cromo_tienda_escogido = {
+      "nombre": cromo_tienda["nombre_jugador"],
+      "imagen_seleccion": cromo_tienda["logo_seleccion"],
+      "imagenUrl": cromo_tienda["imagen_player"],
     };
-    
 
     return Container(
       width: 160,
@@ -39,7 +39,10 @@ class CartasTienda extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 26, 29, 42),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color.fromARGB(93, 255, 255, 255), width: 1),
+        border: Border.all(
+          color: const Color.fromARGB(93, 255, 255, 255),
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.3),
@@ -71,14 +74,13 @@ class CartasTienda extends StatelessWidget {
             width: 90,
             height: 100,
             fit: BoxFit.contain,
-            errorBuilder: (context, error, stackTrace) => 
-              const Icon(Icons.person, size: 80, color: Colors.grey),
+            errorBuilder: (context, error, stackTrace) =>
+                const Icon(Icons.person, size: 80, color: Colors.grey),
           ),
 
           const SizedBox(height: 8),
 
           // Nombre del jugador
-
           Text(
             cromo_tienda["nombre_jugador"],
             textAlign: TextAlign.center,
@@ -94,7 +96,6 @@ class CartasTienda extends StatelessWidget {
           const SizedBox(height: 12),
 
           // boton
-
           SizedBox(
             width: 100,
             height: 32,
@@ -105,44 +106,47 @@ class CartasTienda extends StatelessWidget {
                 //print(cromo_tienda["nombre"]);
                 print(cromo_tienda_escogido);
                 showModalBottomSheet(
-                context: context, 
-                builder: (BuildContext context){
-                  return Container(
-                    color: const Color.fromARGB(255, 26, 29, 42),
-                    width: 400,
-                    height: 500,
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 10,),
-                        Text("Escoge la carta a intercambiar", style: TextStyle(
-                          color: Colors.white
-                        ),),
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Container(
+                      color: const Color.fromARGB(255, 26, 29, 42),
+                      width: 400,
+                      height: 500,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 10),
 
-                        const SizedBox(height: 5,),
-                        Expanded(
-                          child: SingleChildScrollView(
-                          
-                          child: Wrap(
-                            spacing: 20,
-                            runSpacing: 20,
-                            alignment: WrapAlignment.center,
-                            children: List.generate(cromos_user.length, (index) {
-                              final lista_cromos = cromos_user[index];
-                             
-                              return CartasUserIntercambio(
-                                lista_cromos_usuario_intercambio: lista_cromos, carta_seleccionada:cromo_tienda_escogido
-                                
-                                );
-                            }),
+                          Text(
+                            "Escoge la carta a intercambiar",
+                            style: TextStyle(color: Colors.white),
                           ),
-                        )
-                        )
 
-                        
-                      ],
-                    ),
-                  );
-                },
+                          const SizedBox(height: 5),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Wrap(
+                                spacing: 20,
+                                runSpacing: 20,
+                                alignment: WrapAlignment.center,
+                                children: List.generate(cromos_user.length, (
+                                  index,
+                                ) {
+                                  final lista_cromos = cromos_user[index];
+
+                                  return CartasUserIntercambio(
+                                    lista_cromos_usuario_intercambio:
+                                        lista_cromos,
+                                    carta_seleccionada: cromo_tienda_escogido,
+                                  );
+                                }),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 70,)
+                        ],
+                      ),
+                    );
+                  },
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -168,13 +172,12 @@ class CartasTienda extends StatelessWidget {
   }
 
   //parte escrtorio
-  
-   Widget cartaTiendaEscritorio(BuildContext context) {
+
+  Widget cartaTiendaEscritorio(BuildContext context) {
     final dynamic cromo_tienda_escogido = {
       "nombre_jugador": cromo_tienda["nombre_jugador"],
       "logo_seleccion": cromo_tienda["logo_seleccion"],
       "imagen_player": cromo_tienda["imagen_player"],
-      
     };
 
     return Container(
@@ -217,14 +220,16 @@ class CartasTienda extends StatelessWidget {
             child: Align(
               alignment: Alignment.topRight,
               child: Container(
-                
                 child: Image.network(
                   cromo_tienda["logo_seleccion"],
                   width: 70,
                   height: 45,
                   fit: BoxFit.contain,
-                  errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.sports_soccer, size: 35, color: Colors.white70),
+                  errorBuilder: (context, error, stackTrace) => const Icon(
+                    Icons.sports_soccer,
+                    size: 35,
+                    color: Colors.white70,
+                  ),
                 ),
               ),
             ),
@@ -276,14 +281,18 @@ class CartasTienda extends StatelessWidget {
               height: 42,
               child: ElevatedButton(
                 onPressed: () {
-
                   modalIntercambioEscritorio(context, cromo_tienda_escogido);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 125, 103, 146),
                   foregroundColor: Colors.white,
                   elevation: 4,
-                  shadowColor: const Color.fromARGB(255, 125, 103, 146).withOpacity(0.5),
+                  shadowColor: const Color.fromARGB(
+                    255,
+                    125,
+                    103,
+                    146,
+                  ).withOpacity(0.5),
                   textStyle: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -301,9 +310,12 @@ class CartasTienda extends StatelessWidget {
     );
   }
 
-  void modalIntercambioEscritorio(BuildContext context, dynamic cromoSeleccionado) {
+  void modalIntercambioEscritorio(
+    BuildContext context,
+    dynamic cromoSeleccionado,
+  ) {
     final bool isDesktop = MediaQuery.of(context).size.width > 800;
-    
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -342,13 +354,7 @@ class CartasTienda extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5),
-              Text(
-                "Selecciona una de tus cartas repetidas",
-                style: TextStyle(
-                  color: Colors.white54,
-                  fontSize: isDesktop ? 12 : 11,
-                ),
-              ),
+
               const SizedBox(height: 15),
               Expanded(
                 child: SingleChildScrollView(
@@ -367,12 +373,10 @@ class CartasTienda extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
             ],
           ),
         );
       },
     );
   }
-
 }
