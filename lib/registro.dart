@@ -129,7 +129,6 @@ class _RegistroPage extends State<RegistroPage>{
 
                   TextFormField(
                     controller: correo,
-                    obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Introduce tu correo";

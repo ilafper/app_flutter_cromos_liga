@@ -175,7 +175,7 @@ class CromoColeccion extends StatelessWidget {
     if (!desbloqueado) {
       return SizedBox(
         width: 250,
-        height: 350,
+        height: 370,
         child: Stack(
           children: [
             Positioned.fill(
@@ -248,7 +248,7 @@ class CromoColeccion extends StatelessWidget {
 
     return Container(
       width: 250,
-      height: 350,
+      height: 370,
 
       child: Stack(
         children: [
